@@ -18,7 +18,7 @@ jobs:
 
     - name: Give Permissions
       run: |
-            git config --global --add safe.directory '*'
+            git config --global --add safe.directory '/github/workspace/'
 
     - name: Android kernel build
       uses: lemniskett/android-kernel-actions@master
