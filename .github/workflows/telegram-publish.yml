@@ -23,7 +23,7 @@ jobs:
         NAME: Varoo Kernel
       with:
         arch: arm64
-        compiler: gcc/12
+        compiler: clang/15
         defconfig: valerydelinois_defconfig
         image: Image.gz
       
