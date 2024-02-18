@@ -27,12 +27,7 @@ jobs:
         defconfig: valerydelinois_defconfig
         image: Image.gz
       
-    - name: Upload Image.gz as artifact
-      uses: actions/upload-artifact@v4
-      id: out
-      with:
-          name: image.gz
-          path: out/arch/arm64/boot/Image.gz
+    
     - name: Send Image.gz to TG
       uses: appleboy/telegram-action@master
       with:
