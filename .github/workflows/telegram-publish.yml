@@ -16,6 +16,10 @@ jobs:
         repository: lemniskett/AnyKernel3
         path: zipper
 
+    - name: Setup ToolChain
+      run: |
+          chmod a+x $GITHUB_WORKSPACE/toolchain/*
+        
     - name: Android kernel build
       uses: lemniskett/android-kernel-actions@master
       id: build
