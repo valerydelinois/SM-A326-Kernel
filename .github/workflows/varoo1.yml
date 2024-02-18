@@ -1,0 +1,25 @@
+name: Varoo1
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build-kernel:
+    name: Build Kernel
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Build
+        uses: dabao1955/kernel_build_action@main
+        with:
+          kernel-url: https://github.com/valerydelinois/SM-A326-Kernel-U4
+          branch: main
+          config: physwizz_defconfig
+          arch: arm64
+          aosp-gcc: false
+          aosp-clang: false
+          python-2.7: true
+          android-version: 13
+          aosp-clang-version: r510928
+          anykernel3: true
+          release: true
+          bootimg-url: https://file.io/X3ZBrD6h9tF4

@@ -1,0 +1,47 @@
+name: Build on Tag
+
+on:
+  workflow_dispatch:
+
+jobs:
+
+  run_tests:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Run script file
+      run: |
+         chmod +x a${GITHUB_WORKSPACE}/build_kernel.sh
+         bash ${GITHUB_WORKSPACE}/build_kernel.sh
+      shell: bash
+    - name: Download all workflow run artifacts
+    - uses: actions/download-artifact@v4
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout kernel source
+      uses: actions/checkout@v2
+
+    - name: Checkout zipper
+      uses: actions/checkout@v2
+      with:
+        repository: lemniskett/AnyKernel3
+        path: zipper
+
+    - name: Android kernel build
+      uses: lemniskett/android-kernel-actions@master
+      id: build
+      env:
+        NAME: Dark-Ages-Último
+      with:
+        arch: arm64
+        compiler: gcc/10
+        defconfig: physwizz_defconfig
+        image: Image.gz-dtb
+
+    - name: Release build
+      uses: ncipollo/release-action@v1
+      with:
+        artifacts: ${{ steps.build.outputs.outfile }}
+        token: ${{ secrets.GITHUB_TOKEN }}

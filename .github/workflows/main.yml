@@ -1,0 +1,18 @@
+name: "Build Koko Kernel."              # Description of the workflow.
+on:                                    # Branch to build.
+  workflow_dispatch:                                  # Allow to manually trigger workflow.
+jobs:
+  build:
+    name: "Build Koko kernel"
+    runs-on: ubuntu-latest
+    steps:
+    - name: checkout repo
+      uses: actions/checkout@v2.3.4
+    - name: "Ann lage"                                # baton
+      run: chmod +x build_kernel.sh && bash build_kernel.sh
+
+    - name: Copy out folder from runner to repo
+      run: |
+        rm -rf ${GITHUB_WORKSPACE}/artifacts
+        mkdir artifacts
+        cp -r /home/runner/work/SM-A326-Kernel-U4/SM-A326-Kernel-U4/ ${GITHUB_WORKSPACE}/artifacts
