@@ -19,7 +19,7 @@ jobs:
     - name: Give Permissions
       run: |
             git config --global --add safe.directory '/home/runner/work/SM-A326-Kernel/SM-A326-Kernel'
-            chmod +x '/home/runner/work/SM-A326-Kernel/SM-A326-Kernel/*'
+            chmod +x '/home/runner/work/SM-A326-Kernel/SM-A326-Kernel/'
             pwd
 
     - name: Android kernel build
