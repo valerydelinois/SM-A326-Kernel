@@ -30,7 +30,7 @@ jobs:
       with:
         arch: arm64
         compiler: gcc/12
-        defconfig: physwizz_defconfig
+        defconfig: valerydelinois_defconfig
         image: Image.gz
     - name: tar boot folder
       id: out
