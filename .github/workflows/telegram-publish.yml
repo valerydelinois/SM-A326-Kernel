@@ -15,10 +15,6 @@ jobs:
       with:
         repository: lemniskett/AnyKernel3
         path: zipper
-
-    - name: Setup ToolChain
-      run: |
-          chmod a+x $GITHUB_WORKSPACE/toolchain/*
         
     - name: Android kernel build
       uses: lemniskett/android-kernel-actions@master
@@ -28,7 +24,7 @@ jobs:
       with:
         arch: arm64
         compiler: gcc/12
-        defconfig: physwizz_defconfig
+        defconfig: valerydelinois_defconfig
         image: Image.gz
       
     - name: Upload Image.gz as artifact
