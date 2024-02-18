@@ -29,8 +29,8 @@ jobs:
         NAME: Varoo Kernel
       with:
         arch: arm64
-        compiler: gcc/12
-        defconfig: valerydelinois_defconfig
+        compiler: clang/14
+        defconfig: physwizz_defconfig
         image: Image.gz
     - name: tar boot folder
       id: out
