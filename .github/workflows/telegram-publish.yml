@@ -26,30 +26,22 @@ jobs:
         compiler: gcc/12
         defconfig: physwizz_defconfig
         image: Image.gz
-    - name: tar boot folder
+      
+    - name: Upload Image.gz as artifact
+      uses: actions/upload-artifact@v4
       id: out
-      run: |
-        start_time_="$(date +%s)"
-        date="$(date +%d%m%Y-%I%M)"
-        pwd
-        ls
-        tar -cf boot.tar out/arch/arm64/boot/Image.gz
-        ls
-        cd out/arch/arm64/boot/
-        pwd
-        ls
-        cd
-        #set_output outfile_ $GITHUB_WORKSPACE/boot.tar
-        #set_output elapsed_time_ "$(echo "$(date +%s)"-"$start_time_" | bc)"
-    - name: Send to TG
+      with:
+          name: code-coverage-report
+          path: out/arch/arm64/boot/Image.gz
+    - name: Send Image.gz to TG
       uses: appleboy/telegram-action@master
       with:
           to: -1002075366867
           token: 6504843621:AAFgBLfZk5vkyNlATqeVuSs46VkYXIlwJew
-          message: Image file!, took ${{ steps.out.outputs.elapsed_time_ }} seconds.
-          document: $GITHUB_WORKSPACE/out/arch/arm64/boot/Image.gz
+          message: Image.gz file!
+          document: out/arch/arm64/boot/Image.gz
       
-    - name: Release build
+    - name: Release kernel build to TG
       uses: appleboy/telegram-action@master
       with:
         to: -1002075366867
