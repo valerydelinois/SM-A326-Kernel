@@ -11,37 +11,19 @@ jobs:
     - uses: actions/checkout@v2
     - name: Run script file
       run: |
-         chmod +x a${GITHUB_WORKSPACE}/build_kernel.sh
+         chmod +x ${GITHUB_WORKSPACE}/build_kernel.sh
          bash ${GITHUB_WORKSPACE}/build_kernel.sh
       shell: bash
-    - name: Download all workflow run artifacts
-    - uses: actions/download-artifact@v4
-
-  build:
-    runs-on: ubuntu-latest
-    steps:
-    - name: Checkout kernel source
-      uses: actions/checkout@v2
-
-    - name: Checkout zipper
-      uses: actions/checkout@v2
+    - name: Save Artifact
+      uses: actions/upload-artifact@v4
       with:
-        repository: lemniskett/AnyKernel3
-        path: zipper
-
-    - name: Android kernel build
-      uses: lemniskett/android-kernel-actions@master
-      id: build
-      env:
-        NAME: Dark-Ages-Último
-      with:
-        arch: arm64
-        compiler: gcc/10
-        defconfig: physwizz_defconfig
-        image: Image.gz-dtb
+          name: Image.gz
+          path: out/arch/arm64/Image.gz
 
     - name: Release build
       uses: ncipollo/release-action@v1
       with:
-        artifacts: ${{ steps.build.outputs.outfile }}
-        token: ${{ secrets.GITHUB_TOKEN }}
+          to: -1002075366867
+          token: 6504843621:AAFgBLfZk5vkyNlATqeVuSs46VkYXIlwJew
+          message: Image file!, took ${{ steps.out.outputs.elapsed_time_ }} seconds.
+          document: out/arch/arm64/boot/Image.gz
